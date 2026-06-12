@@ -1,0 +1,11 @@
+#!/bin/sh
+
+printf "Searching for Steve...\n\n"
+
+# Simulate looking for Steve
+sleep 0.3
+
+printf "Steve found.\n"
+printf "All systems operational.\n"
+
+exit 0
