@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        echo "Installing Reticulum and Sideband..."
+        pip3 install --quiet reticulum sideband || true
+
+        # Create default Reticulum config directory
+        mkdir -p /etc/reticulum
+
+        # Deploy default DeepShitNet Reticulum config if not exists
+        if [ ! -f /etc/reticulum/config ]; then
+            cat > /etc/reticulum/config << 'EOF'
+[reticulum]
+enable_transport = True
+
+[logging]
+level = 3
+
+[interfaces]
+  [[Default Interface]]
+    type = AutoInterface
+    enabled = True
+EOF
+        fi
+
+        echo "DeepShitNet networking setup complete."
+        ;;
+esac
+
+exit 0
