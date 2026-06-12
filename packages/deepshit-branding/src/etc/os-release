@@ -1,0 +1,7 @@
+PRETTY_NAME="DeepShit OS Steve 0.1a"
+NAME="DeepShit OS"
+ID=deepshit
+ID_LIKE=debian
+VERSION="Steve 0.1a"
+VERSION_CODENAME=steve
+HOME_URL="https://github.com/csesardic/deepshitNet"
