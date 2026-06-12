@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "DeepShitNet Peers"
+echo "----------------"
+
+echo "(Peer listing not yet fully implemented)"
+echo "Run 'deep-status' for basic node information."
