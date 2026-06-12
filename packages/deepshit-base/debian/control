@@ -7,6 +7,6 @@ Standards-Version: 4.6.2
 
 Package: deepshit-base
 Architecture: all
-Depends: deepshit-branding, deepshit-steve, deepshit-network, deepshit-config
+Depends: ${misc:Depends}, deepshit-branding, deepshit-steve, deepshit-network, deepshit-config, deepshit-boot
 Description: DeepShit OS base meta-package (Steve 0.1a)
  Pulls in core DeepShit OS packages.

@@ -1,0 +1,13 @@
+Source: deepshit-boot
+Section: misc
+Priority: optional
+Maintainer: DeepShit OS Team <dev@deepshitnet>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+
+Package: deepshit-boot
+Architecture: all
+Depends: ${misc:Depends}
+Description: DeepShit OS boot layout defaults (Steve 0.1a)
+ Provides boot partition defaults and filesystem layout configuration
+ for DeepShit OS image builds.

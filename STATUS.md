@@ -15,11 +15,16 @@ This is currently positioned as an appliance-style OS rather than a general-purp
 - [x] `deepshit-steve`
 - [x] `deepshit-base`
 - [x] `deepshit-network` packaging baseline
+- [x] `deepshit-config` packaging baseline
+- [x] `deepshit-boot` packaging baseline
 
 ### Build System
 - [x] Multi-architecture aware build system
 - [x] Initial `debootstrap` support for aarch64
 - [x] Custom package builds now use `dpkg-buildpackage`
+- [x] Rootfs installs fail fast and validate the core package set
+- [x] Build script assembles a Pi-style disk image from the validated rootfs
+- [x] Arm64 rootfs now installs Debian kernel/initramfs boot packages
 
 ### Networking Baseline
 - [x] Packaged Reticulum config installs to `/etc/reticulum/config`
@@ -41,7 +46,9 @@ This is currently positioned as an appliance-style OS rather than a general-purp
 ## In Progress
 
 - Reticulum + Sideband beyond single-node bootstrap
-- Reliable package installation inside the full rootfs build
+- Cross-architecture rootfs builds
+- Expand `deepshit-config` beyond placeholder system defaults
+- Raspberry Pi firmware and kernel integration for genuinely bootable images
 
 ## Not Yet Implemented
 

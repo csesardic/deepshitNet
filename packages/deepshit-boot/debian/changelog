@@ -1,0 +1,6 @@
+deepshit-boot (0.1a) unstable; urgency=medium
+
+  * Initial release for DeepShit OS Steve 0.1a
+  * Add boot config defaults and filesystem layout files
+
+ -- DeepShit OS Team <dev@deepshitnet>  Fri, 12 Jun 2026 13:05:00 +0000
