@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        # Set default wallpaper if possible
+        if [ -f /usr/share/backgrounds/deepshit/seagull-wallpaper.jpg ]; then
+            update-alternatives --install /usr/share/images/desktop-base/desktop-background \
+                desktop-background /usr/share/backgrounds/deepshit/seagull-wallpaper.jpg 50 || true
+        fi
+
+        # Update os-release if needed
+        if [ -f /etc/os-release ]; then
+            echo "# DeepShit OS Steve 0.1a" >> /etc/os-release || true
+        fi
+        ;;
+esac
+
+exit 0
