@@ -1,35 +1,51 @@
 #!/bin/bash
-# build.sh - Main build script for DeepShitNet
+# build.sh - Main build script for DeepShitNet (Steve 0.1a)
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Default architecture
 ARCH="${ARCH:-aarch64}"
+VERSION="Steve 0.1a"
 
-# Load common functions
 source "${SCRIPT_DIR}/common.sh"
-
-# Load architecture-specific config
 load_config "$ARCH"
 
 check_root
 
-log "Starting DeepShitNet build for architecture: $ARCH"
-
-# TODO: Actual build logic will go here
-# For now this is a skeleton
+log "Building DeepShitNet $VERSION for $ARCH"
 
 WORK_DIR="/tmp/deepshit-build-${ARCH}"
 ROOTFS_DIR="${WORK_DIR}/rootfs"
 
-log "Work directory: $WORK_DIR"
-
+rm -rf "$WORK_DIR"
 mkdir -p "$WORK_DIR" "$ROOTFS_DIR"
 
-log "Build system initialized successfully for $ARCH"
-log "Next steps will be implemented: debootstrap + Parrot repos + branding"
+log "Running debootstrap for $DEBARCH..."
 
-# Placeholder for future steps
-# debootstrap --arch=$DEBARCH ... etc.
+debootstrap \
+    --arch="$DEBARCH" \
+    --variant="$VARIANT" \
+    --include="${BASE_PACKAGES}" \
+    "$SUITE" \
+    "$ROOTFS_DIR" \
+    "$PARROT_MIRROR" || error "debootstrap failed"
+
+log "Configuring system..."
+
+# Set hostname
+echo "deepshit-steve" > "$ROOTFS_DIR/etc/hostname"
+
+# Basic os-release
+cat > "$ROOTFS_DIR/etc/os-release" << EOF
+PRETTY_NAME="DeepShit OS $VERSION"
+NAME="DeepShit OS"
+ID=deepshit
+ID_LIKE=debian
+VERSION="$VERSION"
+VERSION_CODENAME=steve
+HOME_URL="https://github.com/csesardic/deepshitNet"
+EOF
+
+log "Build completed successfully for $ARCH"
+log "Rootfs location: $ROOTFS_DIR"
