@@ -1,0 +1,12 @@
+Source: deepshit-base
+Section: misc
+Priority: optional
+Maintainer: DeepShit OS Team <dev@deepshitnet>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+
+Package: deepshit-base
+Architecture: all
+Depends: deepshit-branding, deepshit-steve, deepshit-network, deepshit-config
+Description: DeepShit OS base meta-package (Steve 0.1a)
+ Pulls in core DeepShit OS packages.
