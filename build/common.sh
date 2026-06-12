@@ -49,6 +49,16 @@ detect_boot_dir() {
     error "Unable to determine boot directory inside $rootfs_dir"
 }
 
+dir_has_nonhidden_files() {
+    local target_dir="$1"
+
+    if [ ! -d "$target_dir" ]; then
+        return 1
+    fi
+
+    find "$target_dir" -mindepth 1 -type f ! -name 'README.md' ! -name '.gitkeep' | grep -q .
+}
+
 # Load architecture config
 load_config() {
     local arch="$1"

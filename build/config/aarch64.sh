@@ -15,6 +15,8 @@ VARIANT="minbase"
 # Packages to include
 BASE_PACKAGES="parrot-core parrot-tools parrot-interface parrot-desktop parrot-network"
 BOOT_PACKAGES="linux-image-arm64 initramfs-tools flash-kernel"
+FIRMWARE_PACKAGES="raspi-firmware"
+FIRMWARE_OVERLAY_DIR="${SCRIPT_DIR}/assets/pi5-firmware"
 
 # Image layout
 IMAGE_NAME="deepshit-steve-0.1a-aarch64.img"
