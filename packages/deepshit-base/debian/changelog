@@ -1,0 +1,6 @@
+deepshit-base (0.1a) unstable; urgency=medium
+
+  * Initial release for DeepShit OS Steve 0.1a
+  * Pull in branding, network, steve, and config packages
+
+ -- DeepShit OS Team <dev@deepshitnet>  Fri, 12 Jun 2026 12:45:00 +0000

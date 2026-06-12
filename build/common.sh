@@ -18,6 +18,37 @@ check_root() {
     fi
 }
 
+require_command() {
+    if ! command -v "$1" >/dev/null 2>&1; then
+        error "Required command not found: $1"
+    fi
+}
+
+assert_native_arch() {
+    local host_arch
+    host_arch="$(dpkg --print-architecture)"
+
+    if [ "$host_arch" != "$DEBARCH" ]; then
+        error "Cross-architecture builds are not configured yet (host: $host_arch, target: $DEBARCH)"
+    fi
+}
+
+detect_boot_dir() {
+    local rootfs_dir="$1"
+
+    if [ -d "$rootfs_dir/boot/firmware" ]; then
+        echo "/boot/firmware"
+        return 0
+    fi
+
+    if [ -d "$rootfs_dir/boot" ]; then
+        echo "/boot"
+        return 0
+    fi
+
+    error "Unable to determine boot directory inside $rootfs_dir"
+}
+
 # Load architecture config
 load_config() {
     local arch="$1"

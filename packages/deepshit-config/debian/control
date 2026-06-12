@@ -1,0 +1,13 @@
+Source: deepshit-config
+Section: misc
+Priority: optional
+Maintainer: DeepShit OS Team <dev@deepshitnet>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+
+Package: deepshit-config
+Architecture: all
+Depends: ${misc:Depends}
+Description: DeepShit OS default system configuration (Steve 0.1a)
+ Provides the baseline /etc configuration for DeepShit OS without
+ overlapping the branding or networking packages.

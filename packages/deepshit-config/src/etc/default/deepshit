@@ -1,0 +1,3 @@
+# /etc/default/deepshit
+DEEPSHIT_CONFIG_DIR=/etc/deepshit
+DEEPSHIT_STATE_DIR=/var/lib/deepshit
