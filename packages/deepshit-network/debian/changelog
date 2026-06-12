@@ -1,0 +1,10 @@
+deepshit-network (0.1a) unstable; urgency=medium
+
+  * Package Reticulum service and helpers with debhelper
+  * Install the shipped config instead of generating a divergent copy
+  * Fail fast when Reticulum dependencies cannot be installed
+  * Align helper scripts with the generated identity path
+  * Generate a node identity during package configuration
+  * Report Reticulum service state in deep-status
+
+ -- DeepShit OS Team <dev@deepshitnet>  Fri, 12 Jun 2026 12:10:00 +0000

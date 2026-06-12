@@ -1,11 +1,30 @@
 #!/bin/sh
+set -e
+
+IDENTITY_FILE="/var/lib/deepshit/reticulum/identity.id"
 
 echo "=== DeepShitNet Status ==="
 
 echo ""
-echo "Reticulum: $(python3 -c 'import RNS; print("Running")' 2>/dev/null || echo 'Not installed')"
+if python3 -c "import RNS" >/dev/null 2>&1; then
+    echo "Reticulum: Installed"
+else
+    echo "Reticulum: Not installed"
+fi
 
-echo "Node identity: $(cat /var/lib/deepshit/reticulum/identity.id 2>/dev/null || echo 'Not generated')"
+if [ -f "$IDENTITY_FILE" ]; then
+    echo "Node identity: Present at $IDENTITY_FILE"
+else
+    echo "Node identity: Not generated"
+fi
+
+if command -v systemctl >/dev/null 2>&1; then
+    if systemctl is-active --quiet deepshit-reticulum.service; then
+        echo "Reticulum service: Active"
+    else
+        echo "Reticulum service: Inactive"
+    fi
+fi
 
 echo ""
 echo "Run 'steve' for a quick check."

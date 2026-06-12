@@ -14,10 +14,19 @@ This is currently positioned as an appliance-style OS rather than a general-purp
 - [x] `deepshit-branding`
 - [x] `deepshit-steve`
 - [x] `deepshit-base`
+- [x] `deepshit-network` packaging baseline
 
 ### Build System
 - [x] Multi-architecture aware build system
 - [x] Initial `debootstrap` support for aarch64
+- [x] Custom package builds now use `dpkg-buildpackage`
+
+### Networking Baseline
+- [x] Packaged Reticulum config installs to `/etc/reticulum/config`
+- [x] `deepshit-reticulum.service` uses `/usr/bin/python3`
+- [x] Package install creates `/var/lib/deepshit/reticulum/`
+- [x] Package install generates `identity.id` when dependencies are available
+- [x] `deep-status` and `deep-mesh` now agree on the identity file path
 
 ## Steve 0.2 Target
 
@@ -31,12 +40,14 @@ This is currently positioned as an appliance-style OS rather than a general-purp
 
 ## In Progress
 
-- `deepshit-network` — Reticulum + Sideband integration
+- Reticulum + Sideband beyond single-node bootstrap
+- Reliable package installation inside the full rootfs build
 
 ## Not Yet Implemented
 
 - Mesh routing and relay functionality
-- .deep service discovery
+- LoRa or Meshtastic transport integration
+- `.deep` service discovery
 - Peer-to-peer messaging
 - Custom package repository
 - Automatic updates
@@ -45,7 +56,7 @@ This is currently positioned as an appliance-style OS rather than a general-purp
 ## Future Features
 
 - `deepshit-tools` package (`deep-status`, `deep-peers`, `deep-route`, `deep-version`)
-- .deep local service discovery
+- `.deep` local service discovery
 - Node-to-node messaging
 - DeepShit package repository
 - Raspberry Pi 5 image builder
@@ -55,24 +66,24 @@ This is currently positioned as an appliance-style OS rather than a general-purp
 ## Project Maturity (humorous)
 
 - A few days ago: **0/10** (Pure chaos)
-- Today: **3/10** (Actual distro skeleton)
+- Today: **4/10** (Network package is packaged properly)
 
-The jump from 3/10 to 6/10 tends to happen much faster once the foundations exist.
+The jump from 4/10 to 6/10 tends to happen much faster once the foundations exist.
 
 ## Design Goals
 
 - Multi-architecture support from the beginning
 - Custom packages (not just rebranding)
 - Easy to fork and extend
-- Strong chaotic branding (Steve, .deep, seagull mascot)
+- Strong chaotic branding (Steve, `.deep`, seagull mascot)
 
 ## Repository Structure
 
-```
+```text
 deepshitNet/
-├── build/
-├── packages/
-├── branding/
-├── configs/
-└── STATUS.md
+|-- build/
+|-- packages/
+|-- branding/
+|-- configs/
+`-- STATUS.md
 ```

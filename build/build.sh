@@ -29,9 +29,14 @@ debootstrap --arch="$DEBARCH" --variant="$VARIANT" "$SUITE" "$ROOTFS_DIR" "$PARR
 log "Building custom DeepShit packages..."
 for pkgdir in "${SCRIPT_DIR}/../packages/"*/ ; do
     pkgname=$(basename "$pkgdir")
-    if [ -d "$pkgdir/debian" ]; then
+    if [ -f "$pkgdir/debian/control" ]; then
         log "Building package: $pkgname"
-        (cd "$pkgdir" && dpkg-deb --build . "$DEBS_DIR/${pkgname}.deb") || true
+        (
+            cd "$pkgdir"
+            dpkg-buildpackage -us -uc -b
+        ) || error "failed to build package: $pkgname"
+
+        find "${SCRIPT_DIR}/../packages" -maxdepth 1 -type f -name "${pkgname}_*.deb" -exec mv -f {} "$DEBS_DIR/" \;
     fi
 done
 

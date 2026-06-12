@@ -4,7 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/python3 -m RNS.Utilities.Reticulum
+ExecStart=/usr/bin/python3 -m RNS.Utilities.Reticulum
+WorkingDirectory=/var/lib/deepshit/reticulum
 Restart=on-failure
 
 [Install]
