@@ -2,63 +2,77 @@
 
 **Current Version:** Steve 0.1a
 
-## Overview
+## What is DeepShit OS?
 
-DeepShitNet is an underground decentralized mesh network and OS built on top of Parrot OS repositories, designed to be multi-architecture and easily forkable.
+A **Parrot-based mesh-network appliance OS** focused on decentralized, resilient, and invisible networking. The goal is to create something that can run on devices like the Raspberry Pi 5 and provide a hidden parallel network layer.
+
+This is currently positioned as an appliance-style OS rather than a general-purpose desktop distribution.
 
 ## Completed (Steve 0.1a)
 
 ### Packages
-- [x] `deepshit-branding` — Finished (os-release, hostname, motd, wallpaper support)
-- [x] `deepshit-steve` — Finished (`/usr/bin/steve` command with exit codes)
-- [x] `deepshit-base` — Finished (meta-package)
+- [x] `deepshit-branding`
+- [x] `deepshit-steve`
+- [x] `deepshit-base`
 
 ### Build System
-- [x] Basic multi-architecture build system (`build/`)
-- [x] `build.sh` with debootstrap support for aarch64
-- [x] Architecture configs (`aarch64.sh` + `amd64.sh` placeholder)
+- [x] Multi-architecture aware build system
+- [x] Initial `debootstrap` support for aarch64
+
+## Steve 0.2 Target
+
+**Goal:** First bootable system that actually feels like DeepShit OS.
+
+- Build system installs custom packages into the rootfs automatically
+- `deepshit-base` is installed by default
+- `deepshit-branding` is installed by default
+- `deepshit-steve` is installed by default
+- First bootable Raspberry Pi 5 image
 
 ## In Progress
 
-- `deepshit-network` — Started (Reticulum + Sideband integration via postinst)
+- `deepshit-network` — Reticulum + Sideband integration
 
-## Next Major Milestone
+## Not Yet Implemented
 
-**Make the build system actually install custom packages** into the generated rootfs.
-
-This is currently the most important next step. Right now we can build a rootfs, but we need the system to automatically include our custom DeepShit packages (`deepshit-branding`, `deepshit-steve`, `deepshit-base`, etc.).
+- Mesh routing and relay functionality
+- .deep service discovery
+- Peer-to-peer messaging
+- Custom package repository
+- Automatic updates
+- Full diagnostics suite
 
 ## Future Features
 
-- `deepshit-tools` package (diagnostics: `deep-status`, `deep-peers`, `deep-route`)
-- .deep service discovery
+- `deepshit-tools` package (`deep-status`, `deep-peers`, `deep-route`, `deep-version`)
+- .deep local service discovery
 - Node-to-node messaging
 - DeepShit package repository
-- Raspberry Pi 5 image builder (`image/pi5/`)
-- x86_64 (PC) support
+- Raspberry Pi 5 image builder
+- x86_64 support
 - Community node management tools
-
-## Design Goals
-
-- Multi-architecture support from day one
-- Custom packages instead of just rebranding
-- Easy to fork and extend
-- Strong branding and humor (Steve, .deep, seagull)
 
 ## Project Maturity (humorous)
 
-- Three days ago: **0/10** (Pure chaos)
+- A few days ago: **0/10** (Pure chaos)
 - Today: **3/10** (Actual distro skeleton)
 
-The jump from 3/10 to 6/10 is often faster once the foundations are in place.
+The jump from 3/10 to 6/10 tends to happen much faster once the foundations exist.
+
+## Design Goals
+
+- Multi-architecture support from the beginning
+- Custom packages (not just rebranding)
+- Easy to fork and extend
+- Strong chaotic branding (Steve, .deep, seagull mascot)
 
 ## Repository Structure
 
 ```
 deepshitNet/
-├── build/           # Build system
-├── packages/        # Custom .deb packages
-├── branding/        # Wallpapers and assets
-├── configs/         # System configs
+├── build/
+├── packages/
+├── branding/
+├── configs/
 └── STATUS.md
 ```
