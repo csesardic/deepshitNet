@@ -1,0 +1,6 @@
+deepshit-steve (0.1a) unstable; urgency=medium
+
+  * Initial release for DeepShit OS Steve 0.1a
+  * Adds /usr/bin/steve command
+
+ -- DeepShit OS Team <dev@deepshitnet>  Fri, 12 Jun 2026 11:30:00 +0000
