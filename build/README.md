@@ -58,10 +58,15 @@ The current arm64 build installs:
 - `linux-image-arm64`
 - `initramfs-tools`
 - `flash-kernel`
+- `raspi-firmware` when available in the configured repositories
 
 This covers the generic Debian kernel/initramfs side. The `deepshit-boot` package now
 owns boot defaults like `config.txt`, `cmdline.txt`, and `/etc/fstab`, but it does
 **not** fully solve Raspberry Pi 5 firmware integration yet.
+
+For Raspberry Pi 5-specific boot assets, the build also supports a local firmware
+overlay directory at `build/assets/pi5-firmware/`. Any non-placeholder files in that
+directory are copied into the boot partition before the final image is assembled.
 
 ## How to Add a New Architecture
 
@@ -72,5 +77,5 @@ owns boot defaults like `config.txt`, `cmdline.txt`, and `/etc/fstab`, but it do
 
 - Image generation (`image/pi5/`, `image/amd64/`)
 - Cross-architecture chroot support
-- Raspberry Pi firmware/kernel package integration
+- Verified Raspberry Pi 5 firmware source selection and boot testing
 - Reduce dependency on upstream Parrot packages

@@ -101,6 +101,13 @@ chroot "$ROOTFS_DIR" /bin/bash -c '
     apt-get update
     apt-get install -y '"$BASE_PACKAGES"'
     apt-get install -y '"$BOOT_PACKAGES"'
+    for pkg in '"$FIRMWARE_PACKAGES"'; do
+        if apt-cache show "$pkg" >/dev/null 2>&1; then
+            apt-get install -y "$pkg"
+        else
+            echo "Firmware package unavailable in configured repositories: $pkg" >&2
+        fi
+    done
     apt-get install -y /tmp/*.deb
 '
 
@@ -120,6 +127,15 @@ rm -f "$ROOTFS_DIR"/tmp/*.deb
 # Step 4: Prepare rootfs for image generation
 TARGET_BOOT_DIR="$(detect_boot_dir "$ROOTFS_DIR")"
 BOOT_SOURCE_DIR="${ROOTFS_DIR}${TARGET_BOOT_DIR}"
+
+if [ -n "${FIRMWARE_OVERLAY_DIR:-}" ] && dir_has_nonhidden_files "$FIRMWARE_OVERLAY_DIR"; then
+    log "Applying Raspberry Pi firmware overlay from $FIRMWARE_OVERLAY_DIR..."
+    cp -a "${FIRMWARE_OVERLAY_DIR}/." "$BOOT_SOURCE_DIR/"
+fi
+
+if ! find "$BOOT_SOURCE_DIR" -maxdepth 1 -type f \( -name '*.elf' -o -name '*.dat' -o -name '*.dtb' \) | grep -q .; then
+    error "Firmware validation failed: no Raspberry Pi firmware assets found in ${BOOT_SOURCE_DIR}"
+fi
 
 if ! find "$BOOT_SOURCE_DIR" -maxdepth 1 -type f ! -name 'config.txt' ! -name 'cmdline.txt' | grep -q .; then
     error "Boot asset validation failed: no firmware or kernel files found in ${BOOT_SOURCE_DIR}"

@@ -16,3 +16,7 @@ configuration belongs inside the OS.
 
 It does not currently ship Raspberry Pi 5 firmware blobs. That remains a separate
 integration task.
+
+The current build can apply a firmware overlay from
+`build/assets/pi5-firmware/` when repo-provided firmware packages are not
+enough for Raspberry Pi 5 boot support.

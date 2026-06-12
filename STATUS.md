@@ -25,6 +25,7 @@ This is currently positioned as an appliance-style OS rather than a general-purp
 - [x] Rootfs installs fail fast and validate the core package set
 - [x] Build script assembles a Pi-style disk image from the validated rootfs
 - [x] Arm64 rootfs now installs Debian kernel/initramfs boot packages
+- [x] Build supports a local Raspberry Pi firmware overlay for Pi 5 boot assets
 
 ### Networking Baseline
 - [x] Packaged Reticulum config installs to `/etc/reticulum/config`
@@ -48,7 +49,7 @@ This is currently positioned as an appliance-style OS rather than a general-purp
 - Reticulum + Sideband beyond single-node bootstrap
 - Cross-architecture rootfs builds
 - Expand `deepshit-config` beyond placeholder system defaults
-- Raspberry Pi firmware and kernel integration for genuinely bootable images
+- Verified Raspberry Pi 5 firmware source and hardware boot testing
 
 ## Not Yet Implemented
 
