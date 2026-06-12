@@ -1,0 +1,15 @@
+Source: deepshit-network
+Section: net
+Priority: optional
+Maintainer: DeepShit OS Team <dev@deepshitnet>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+
+Package: deepshit-network
+Architecture: all
+Depends: python3, python3-pip
+Recommends: deepshit-branding
+Description: DeepShitNet networking layer (Reticulum + Sideband)
+ Provides Reticulum mesh networking, Sideband client,
+ node identity management, and mesh configuration for
+ DeepShit OS Steve 0.1a.
