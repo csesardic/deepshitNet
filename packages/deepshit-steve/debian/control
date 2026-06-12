@@ -1,0 +1,12 @@
+Source: deepshit-steve
+Section: misc
+Priority: optional
+Maintainer: DeepShit OS Team <dev@deepshitnet>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+
+Package: deepshit-steve
+Architecture: all
+Depends: ${misc:Depends}
+Description: DeepShit OS Steve humor and diagnostics (Steve 0.1a)
+ Provides /usr/bin/steve and related diagnostic humor.
