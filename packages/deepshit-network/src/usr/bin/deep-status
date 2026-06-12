@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "=== DeepShitNet Status ==="
+
+echo ""
+echo "Reticulum: $(python3 -c 'import RNS; print("Running")' 2>/dev/null || echo 'Not installed')"
+
+echo "Node identity: $(cat /var/lib/deepshit/reticulum/identity.id 2>/dev/null || echo 'Not generated')"
+
+echo ""
+echo "Run 'steve' for a quick check."
