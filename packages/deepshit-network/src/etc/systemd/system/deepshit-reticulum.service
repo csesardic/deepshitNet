@@ -1,0 +1,11 @@
+[Unit]
+Description=DeepShitNet Reticulum Daemon
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/python3 -m RNS.Utilities.Reticulum
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
