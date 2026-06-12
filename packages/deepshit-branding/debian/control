@@ -1,0 +1,13 @@
+Source: deepshit-branding
+Section: misc
+Priority: optional
+Maintainer: DeepShit OS Team <dev@deepshitnet>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+
+Package: deepshit-branding
+Architecture: all
+Depends: ${misc:Depends}
+Description: DeepShit OS branding and visual identity (Steve 0.1a)
+ Provides custom os-release, hostname, wallpaper, and login messages
+ for DeepShit OS Steve 0.1a.
