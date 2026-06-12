@@ -2,7 +2,7 @@
 
 This directory contains the build system for **DeepShit OS** (based on Parrot OS).
 
-The goal is to have a clean, modular, and multi-architecture build system that can be easily forked and extended.
+**Current Version:** Steve 0.1a
 
 ## Design Principles
 
@@ -12,43 +12,48 @@ The goal is to have a clean, modular, and multi-architecture build system that c
 - Easy to add new architectures later
 - Version controlled and reproducible
 
-## Current Status
+## Current Status (Steve 0.1a)
 
-- Basic structure created
-- `build.sh` skeleton ready
-- `aarch64` (Raspberry Pi 5) config started
-- `amd64` placeholder created
-- Uses `debootstrap` + Parrot repos
+- Basic multi-arch build system created
+- `build.sh` now performs actual `debootstrap` for aarch64
+- Raspberry Pi 5 (aarch64) config implemented
+- amd64 placeholder created for future PC support
+- Basic branding files added (`os-release`, `hostname`)
+- Version naming: Steve 0.1a
 
 ## How to Build (Raspberry Pi 5)
 
 ```bash
 cd build
-ARCH=aarch64 ./build.sh
+ARCH=aarch64 sudo ./build.sh
 ```
+
+This will create a root filesystem in `/tmp/deepshit-build-aarch64/rootfs`
 
 ## How to Add a New Architecture
 
-1. Create `config/<arch>.sh` (e.g. `amd64.sh`)
-2. Define the required variables (see `config/aarch64.sh` for reference)
-3. Run with `ARCH=<newarch> ./build.sh`
+1. Create `config/<arch>.sh` (copy from `aarch64.sh` as template)
+2. Adjust variables as needed
+3. Run with `ARCH=<newarch> sudo ./build.sh`
 
 ## Folder Structure
 
 ```
 build/
-├── build.sh          # Main build script
-├── common.sh         # Shared functions
+├── build.sh
+├── common.sh
 ├── config/
 │   ├── aarch64.sh
 │   └── amd64.sh
 └── README.md
+
+branding/
+configs/deepshit/
 ```
 
-## Future Plans
+## Notes
 
-- Root filesystem generation (current)
-- Full bootable image generation for Raspberry Pi 5
-- Support for x86_64 PCs
-- Custom package building
-- Automated CI builds
+- Run as root (required for debootstrap)
+- Currently generates a root filesystem
+- Full image generation for Raspberry Pi 5 will be added later
+- Wallpaper and more branding assets will be added in branding/
