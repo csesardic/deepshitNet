@@ -12,14 +12,29 @@ This directory contains the build system for **DeepShit OS** (based on Parrot OS
 - Easy to add new architectures later
 - Version controlled and reproducible
 
+## Package Structure (Steve 0.1a)
+
+We are moving toward our own custom packages instead of just rebranding Parrot.
+
+### Packages for Steve 0.1a
+
+| Package              | Priority | Purpose                                   |
+|----------------------|----------|-------------------------------------------|
+| `deepshit-base`      | High     | Core meta-package                         |
+| `deepshit-network`   | High     | Reticulum + mesh networking               |
+| `deepshit-branding`  | High     | Visual identity + system naming           |
+| `deepshit-steve`     | High     | Humor + basic diagnostics (`/usr/bin/steve`) |
+| `deepshit-config`    | Medium   | Default system configuration              |
+| `deepshit-services`  | Low      | Local service discovery (.deep domains)   |
+| `deepshit-admin`     | Low      | Admin/diagnostic tools                    |
+
 ## Current Status (Steve 0.1a)
 
 - Basic multi-arch build system created
-- `build.sh` now performs actual `debootstrap` for aarch64
+- `build.sh` performs `debootstrap` for aarch64
 - Raspberry Pi 5 (aarch64) config implemented
-- amd64 placeholder created for future PC support
-- Basic branding files added (`os-release`, `hostname`)
-- Version naming: Steve 0.1a
+- amd64 placeholder created
+- Basic branding started
 
 ## How to Build (Raspberry Pi 5)
 
@@ -28,32 +43,13 @@ cd build
 ARCH=aarch64 sudo ./build.sh
 ```
 
-This will create a root filesystem in `/tmp/deepshit-build-aarch64/rootfs`
-
 ## How to Add a New Architecture
 
-1. Create `config/<arch>.sh` (copy from `aarch64.sh` as template)
-2. Adjust variables as needed
-3. Run with `ARCH=<newarch> sudo ./build.sh`
+1. Create `config/<arch>.sh`
+2. Run with `ARCH=<newarch> sudo ./build.sh`
 
-## Folder Structure
+## Future Work
 
-```
-build/
-├── build.sh
-├── common.sh
-├── config/
-│   ├── aarch64.sh
-│   └── amd64.sh
-└── README.md
-
-branding/
-configs/deepshit/
-```
-
-## Notes
-
-- Run as root (required for debootstrap)
-- Currently generates a root filesystem
-- Full image generation for Raspberry Pi 5 will be added later
-- Wallpaper and more branding assets will be added in branding/
+- Full custom package building (.deb)
+- Image generation (`image/pi5/`, `image/amd64/`)
+- Reduce dependency on upstream Parrot packages
