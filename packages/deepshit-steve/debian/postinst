@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+    chmod +x /usr/bin/steve || true
+fi
+
+exit 0
