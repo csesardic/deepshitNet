@@ -1,10 +1,9 @@
 #!/bin/bash
-# build.sh - Main build script for DeepShitNet (Steve 0.1a)
+# build.sh - DeepShitNet Build System (Steve 0.1a)
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 ARCH="${ARCH:-aarch64}"
 VERSION="Steve 0.1a"
 
@@ -17,35 +16,35 @@ log "Building DeepShitNet $VERSION for $ARCH"
 
 WORK_DIR="/tmp/deepshit-build-${ARCH}"
 ROOTFS_DIR="${WORK_DIR}/rootfs"
+DEBS_DIR="${WORK_DIR}/debs"
 
 rm -rf "$WORK_DIR"
-mkdir -p "$WORK_DIR" "$ROOTFS_DIR"
+mkdir -p "$WORK_DIR" "$ROOTFS_DIR" "$DEBS_DIR"
 
-log "Running debootstrap for $DEBARCH..."
+# Step 1: Run debootstrap
+log "Running debootstrap..."
+debootstrap --arch="$DEBARCH" --variant="$VARIANT" "$SUITE" "$ROOTFS_DIR" "$PARROT_MIRROR" || error "debootstrap failed"
 
-debootstrap \
-    --arch="$DEBARCH" \
-    --variant="$VARIANT" \
-    --include="${BASE_PACKAGES}" \
-    "$SUITE" \
-    "$ROOTFS_DIR" \
-    "$PARROT_MIRROR" || error "debootstrap failed"
+# Step 2: Build custom packages
+log "Building custom DeepShit packages..."
+for pkgdir in "${SCRIPT_DIR}/../packages/"*/ ; do
+    pkgname=$(basename "$pkgdir")
+    if [ -d "$pkgdir/debian" ]; then
+        log "Building package: $pkgname"
+        (cd "$pkgdir" && dpkg-deb --build . "$DEBS_DIR/${pkgname}.deb") || true
+    fi
+done
 
-log "Configuring system..."
+# Step 3: Install custom packages into rootfs
+log "Installing custom packages into rootfs..."
+cp "$DEBS_DIR"/*.deb "$ROOTFS_DIR/tmp/" 2>/dev/null || true
 
-# Set hostname
-echo "deepshit-steve" > "$ROOTFS_DIR/etc/hostname"
+chroot "$ROOTFS_DIR" /bin/bash -c '
+    apt-get update || true
+    dpkg -i /tmp/*.deb 2>/dev/null || true
+    apt-get install -f -y || true
+' || true
 
-# Basic os-release
-cat > "$ROOTFS_DIR/etc/os-release" << EOF
-PRETTY_NAME="DeepShit OS $VERSION"
-NAME="DeepShit OS"
-ID=deepshit
-ID_LIKE=debian
-VERSION="$VERSION"
-VERSION_CODENAME=steve
-HOME_URL="https://github.com/csesardic/deepshitNet"
-EOF
-
-log "Build completed successfully for $ARCH"
-log "Rootfs location: $ROOTFS_DIR"
+log "Build completed for $ARCH"
+log "Rootfs: $ROOTFS_DIR"
+log "Custom packages should now be installed."
