@@ -1,0 +1,12 @@
+[reticulum]
+enable_transport = True
+share_instance = True
+
+[logging]
+level = 3
+
+[interfaces]
+  [[Default Auto Interface]]
+    type = AutoInterface
+    enabled = True
+    mode = full
