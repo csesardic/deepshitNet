@@ -1,1 +1,2 @@
-# Add default configs and scripts here later
+src/etc/* /etc/
+src/usr/bin/* /usr/bin/

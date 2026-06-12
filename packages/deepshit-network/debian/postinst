@@ -4,25 +4,25 @@ set -e
 case "$1" in
     configure)
         echo "Installing Reticulum and Sideband..."
-        pip3 install --quiet reticulum sideband || true
+        if ! pip3 install --quiet reticulum sideband; then
+            echo "Failed to install Reticulum dependencies." >&2
+            exit 1
+        fi
 
-        # Create default Reticulum config directory
-        mkdir -p /etc/reticulum
+        install -d /etc/reticulum
+        install -d /var/lib/deepshit/reticulum
 
-        # Deploy default DeepShitNet Reticulum config if not exists
-        if [ ! -f /etc/reticulum/config ]; then
-            cat > /etc/reticulum/config << 'EOF'
-[reticulum]
-enable_transport = True
+        if [ ! -f /var/lib/deepshit/reticulum/identity.id ]; then
+            if ! /usr/bin/deep-generate-identity; then
+                echo "Failed to generate DeepShitNet identity." >&2
+                exit 1
+            fi
+        fi
 
-[logging]
-level = 3
-
-[interfaces]
-  [[Default Interface]]
-    type = AutoInterface
-    enabled = True
-EOF
+        if command -v systemctl >/dev/null 2>&1; then
+            systemctl daemon-reload || true
+            systemctl enable deepshit-reticulum.service >/dev/null 2>&1 || true
+            systemctl restart deepshit-reticulum.service >/dev/null 2>&1 || true
         fi
 
         echo "DeepShitNet networking setup complete."

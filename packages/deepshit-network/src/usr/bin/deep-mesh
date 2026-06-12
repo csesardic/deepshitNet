@@ -4,7 +4,7 @@ echo "DeepShitNet Mesh Status"
 echo "----------------------"
 
 echo "Reticulum: $(python3 -c 'import RNS; print("OK")' 2>/dev/null || echo 'Not installed')"
-echo "Node identity: $(cat /var/lib/deepshit/reticulum/identity 2>/dev/null || echo 'Not generated yet')"
+echo "Node identity: $(cat /var/lib/deepshit/reticulum/identity.id 2>/dev/null || echo 'Not generated yet')"
 
 echo ""
 echo "Run 'steve' for a status check."
