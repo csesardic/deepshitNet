@@ -22,12 +22,21 @@ DeepShitNet is an underground decentralized mesh network and OS built on top of 
 
 - `deepshit-network` — Started (Reticulum + Sideband integration via postinst)
 
-## Next Steps
+## Next Major Milestone
 
-- Improve `deepshit-network` (default configs, helper scripts)
-- Add wallpaper to `deepshit-branding`
-- Improve build system to actually install custom packages
-- Start working on image generation for Raspberry Pi 5
+**Make the build system actually install custom packages** into the generated rootfs.
+
+This is currently the most important next step. Right now we can build a rootfs, but we need the system to automatically include our custom DeepShit packages (`deepshit-branding`, `deepshit-steve`, `deepshit-base`, etc.).
+
+## Future Features
+
+- `deepshit-tools` package (diagnostics: `deep-status`, `deep-peers`, `deep-route`)
+- .deep service discovery
+- Node-to-node messaging
+- DeepShit package repository
+- Raspberry Pi 5 image builder (`image/pi5/`)
+- x86_64 (PC) support
+- Community node management tools
 
 ## Design Goals
 
@@ -35,6 +44,13 @@ DeepShitNet is an underground decentralized mesh network and OS built on top of 
 - Custom packages instead of just rebranding
 - Easy to fork and extend
 - Strong branding and humor (Steve, .deep, seagull)
+
+## Project Maturity (humorous)
+
+- Three days ago: **0/10** (Pure chaos)
+- Today: **3/10** (Actual distro skeleton)
+
+The jump from 3/10 to 6/10 is often faster once the foundations are in place.
 
 ## Repository Structure
 
