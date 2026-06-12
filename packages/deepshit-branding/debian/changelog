@@ -1,0 +1,6 @@
+deepshit-branding (0.1a) unstable; urgency=medium
+
+  * Initial release for DeepShit OS Steve 0.1a
+  * Includes custom os-release, hostname and branding files
+
+ -- DeepShit OS Team <dev@deepshitnet>  Fri, 12 Jun 2026 11:30:00 +0000
