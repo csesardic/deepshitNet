@@ -1,0 +1,19 @@
+#!/bin/sh
+
+IDENTITY_DIR="/var/lib/deepshit/reticulum"
+IDENTITY_FILE="$IDENTITY_DIR/identity.id"
+
+mkdir -p "$IDENTITY_DIR"
+
+if [ -f "$IDENTITY_FILE" ]; then
+    echo "Identity already exists at $IDENTITY_FILE"
+    exit 0
+fi
+
+echo "Generating new DeepShitNet node identity..."
+python3 -c "
+import RNS
+identity = RNS.Identity()
+identity.to_file('$IDENTITY_FILE')
+print('Identity generated successfully.')
+" || echo "Failed to generate identity. Is Reticulum installed?"
